@@ -68,12 +68,6 @@ const App: React.FC = () => {
             value={model}
             onChange={(e) => setModel(e.target.value)}
           />
-          <input
-            type="password"
-            placeholder="API Key"
-            value={apiKey}
-            onChange={(e) => setApiKey(e.target.value)}
-          />
         </div>
       </header>
 
@@ -81,7 +75,7 @@ const App: React.FC = () => {
         <div className="message-list">
           {messages.length === 0 && (
             <div style={{ textAlign: 'center', marginTop: '4rem', color: 'var(--text-muted)' }}>
-              <p>Welcome! Enter your API key and start chatting.</p>
+              <p>Welcome! Select a provider and start chatting.</p>
             </div>
           )}
           {messages.map((msg, i) => (
