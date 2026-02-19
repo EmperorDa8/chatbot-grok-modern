@@ -2,14 +2,15 @@ import React, { useState, useRef, useEffect } from 'react';
 import { sendMessage } from './services/aiService';
 import type { Message, Provider } from './services/aiService';
 
-const OPENROUTER_API_KEY = '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';
+const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || '';
+const GROK_API_KEY = import.meta.env.VITE_GROK_API_KEY || '';
 
 const App: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [provider, setProvider] = useState<Provider>('grok');
-  const [apiKey, setApiKey] = useState('');
+  const [apiKey, setApiKey] = useState(GROK_API_KEY);
   const [model, setModel] = useState('grok-beta');
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -47,8 +48,8 @@ const App: React.FC = () => {
     setModel(newProvider === 'grok' ? 'grok-beta' : 'openai/gpt-3.5-turbo');
     if (newProvider === 'openrouter') {
       setApiKey(OPENROUTER_API_KEY);
-    } else {
-      setApiKey('');
+    } else if (newProvider === 'grok') {
+      setApiKey(GROK_API_KEY);
     }
   };
 
